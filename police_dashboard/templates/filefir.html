@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>File FIR</title>
+<link rel="stylesheet" href="{% static 'css/stylescop.css' %}">
+<link rel="stylesheet" href="{% static 'css/filefir.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+
+<style>
+  /* Same CSS as before */
+</style>
+</head>
+<body>
+<header class="header">
+  <img src="{% static 'image/logo.jpg' %}" alt="Logo" />
+  <h1>PCR Hub - File an FIR</h1>
+  <a href="{% url 'indexpublic' %}" class="home-btn"><i class="fas fa-home"></i></a>
+</header>
+
+<div class="main">
+  <form class="form" id="fir-form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="name">Complainant Name</label>
+      <input type="text" name="name" id="name" placeholder="Enter your full name" required />
+    </div>
+    
+    <div class="form-group">
+      <label for="contact">Contact Number</label>
+      <input type="tel" name="contact" id="contact" placeholder="Enter your phone number" required />
+    </div>
+    
+    <div class="form-group">
+      <label for="crime-type">Crime Type</label>
+      <select name="crime_type" id="crime-type" required>
+        <option value="">Select crime type</option>
+        <option>Theft</option><option>Assault</option><option>Fraud</option>
+        <option>Vandalism</option><option>Homicide</option>
+        <option>Drug-Related</option><option>Sexual Offense</option>
+        <option>Cybercrime</option><option>Kidnapping</option>
+        <option>Arson</option><option>Other</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="date">Date of Incident</label>
+      <input type="date" name="incident_date" id="date" required />
+    </div>
+    
+    <div class="form-group">
+      <label for="location">Crime Location</label>
+      <input type="text" name="location" id="location" placeholder="Enter the location of the incident" required />
+    </div>
+    
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea name="description" id="description" rows="4" placeholder="Describe the incident in detail" required></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="file-input">Upload signed FIR:</label>
+      <div class="file-group">
+        <input type="file" name="fir_file" id="file-input" accept=".pdf,.png,.jpg" required />
+        <button type="button" class="clear-btn" id="clear-file">Clear</button>
+      </div>
+    </div>
+    
+    <button type="submit" class="submit-btn">Submit FIR</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('clear-file').onclick = function() {
+    document.getElementById('file-input').value = '';
+  };
+</script>
+</body>
+</html>

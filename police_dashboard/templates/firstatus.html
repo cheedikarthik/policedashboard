@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check Status - Crime Mapping Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/stylescop.css' %}">
+    <link rel="stylesheet" href="{% static 'css/firstatus.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        /* Same CSS as before */
+    </style>
+</head>
+<body>
+<header class="header">
+    <img src="{% static 'image/logo.jpg' %}" alt="Logo" />
+    <h1>PCR Hub - Check Status</h1>
+    <a href="{% url 'indexpublic' %}" class="home-btn"><i class="fas fa-home"></i></a>
+</header>
+
+<div class="status-container">
+    <h2>Check FIR / Report Status</h2>
+
+    <label for="type">Select Type:</label>
+    <select id="type" required>
+        <option value="">-- Select --</option>
+        <option value="FIR">FIR</option>
+        <option value="Report">Complaint Report</option>
+    </select>
+
+    <label for="idInput" id="idLabel" style="display:none;"></label>
+    <input type="text" id="idInput" style="display:none;" placeholder="Enter ID" />
+
+    <button class="btn" onclick="checkStatus()">Check Status</button>
+
+    <div class="status-result" id="statusResult"></div>
+</div>
+
+<script>
+    const typeSelect = document.getElementById('type');
+    const idLabel = document.getElementById('idLabel');
+    const idInput = document.getElementById('idInput');
+    const statusResult = document.getElementById('statusResult');
+
+    typeSelect.addEventListener('change', () => {
+        const type = typeSelect.value;
+        if (type === 'FIR') {
+            idLabel.textContent = 'Enter FIR ID:';
+            idInput.placeholder = 'e.g., FIR-12345';
+        } else if (type === 'Report') {
+            idLabel.textContent = 'Enter Report ID:';
+            idInput.placeholder = 'e.g., REP-67890';
+        }
+        idLabel.style.display = 'block';
+        idInput.style.display = 'block';
+    });
+
+    function checkStatus() {
+        const type = typeSelect.value;
+        const id = idInput.value.trim();
+
+        if (!type || !id) {
+            statusResult.textContent = 'Please select a type and enter an ID.';
+            return;
+        }
+
+        const endpoint = type === 'FIR' ? `/check-fir-status/${id}` : `/check-report-status/${id}`;
+
+        fetch(endpoint)
+            .then(res => {
+                if (!res.ok) throw new Error('ID not found.');
+                return res.json();
+            })
+            .then(data => {
+                statusResult.textContent = `${type} Status: ${data.status}`;
+            })
+            .catch(err => {
+                statusResult.textContent = `Error: ${err.message}`;
+            });
+    }
+</script>
+</body>
+</html>

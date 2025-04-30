@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Management</title>
+    <link rel="stylesheet" href="{% static 'css/stylescop.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="custom-header">
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="{% static 'image/logo.jpg' %}" alt="Police Logo" class="logo">
+            </div>
+
+            <h1>Police Admin Dashboard</h1>
+
+            <ul class="nav-links">
+                <li><a href="{% url 'indexadmin' %}"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                <li><a href="{% url 'officer_management' %}" class="active"><i class="fas fa-user-shield"></i> <span>Manage Officers</span></a></li>
+                <li><a href="{% url 'reports' %}"><i class="fas fa-file-alt"></i> <span>Reports</span></a></li>
+            </ul>
+
+            <div class="user-profile">
+                <div class="user-info">
+                    <div class="user-name" id="user-name"></div>
+                    <div class="user-role" id="user-role"></div>
+                </div>
+                <button class="logout-btn" id="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main-container">
+        <h1>Police Data Management</h1>
+        <table class="police-table">
+            <thead>
+                <tr>
+                    <th>Police ID</th>
+                    <th>Police Name</th>
+                    <th>Rank</th>
+                    <th>Status</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5">No data available</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="officer-management card">
+            <div class="button-group">
+                <button class="action-btn" onclick="location.href='{% url 'add_officer' %}'">Add Officer</button>
+                <button class="action-btn" onclick="location.href='{% url 'edit_officer' %}'">Edit Officer</button>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        document.getElementById('logout-btn').addEventListener('click', function () {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.clear();
+                window.location.href = '{% url "login" %}';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('user-name').textContent = localStorage.getItem('userName') || 'Officer';
+            document.getElementById('user-role').textContent = localStorage.getItem('userRole') || 'Role';
+        });
+    </script>
+</body>
+</html>

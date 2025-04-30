@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crime Reporting</title>
+    <link rel="stylesheet" href="{% static 'css/stylescop.css' %}">
+    <link rel="stylesheet" href="{% static 'css/indexpublic.css' %}">
+</head>
+<body>
+    <header class="header">
+        <img src="{% static 'image/logo.jpg' %}" alt="Logo">
+        <h1>PCR Hub: For Public</h1>
+        <a href="{% url 'login' %}" class="logout-btn" title="Logout">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Welcome to the Public Crime Reporting Hub</h2>
+            <p>Report crimes, file FIRs, check status, and access emergency services.</p>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <i class="fas fa-exclamation-triangle icon"></i>
+                <h3>Report</h3>
+                <p>Report crimes or suspicious activities.</p>
+                <a href="{% url 'reportcrime' %}" class="btn">Report</a>
+            </div>
+            <div class="card">
+                <i class="fas fa-file-alt icon"></i>
+                <h3>File FIR</h3>
+                <p>Submit an FIR online.</p>
+                <a href="{% url 'filefir' %}" class="btn">File an FIR</a>
+            </div>
+            <div class="card">
+                <i class="fas fa-search icon"></i>
+                <h3>Status</h3>
+                <p>Track complaints and FIRs.</p>
+                <a href="{% url 'firstatus' %}" class="btn">Check</a>
+            </div>
+            <div class="card">
+                <i class="fas fa-phone-alt icon"></i>
+                <h3>Emergency</h3>
+                <p>Access emergency helplines.</p>
+                <a href="{% url 'helplines' %}" class="btn">View</a>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

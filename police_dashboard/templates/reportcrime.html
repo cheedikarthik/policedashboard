@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Report a Crime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/stylescop.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reportcrime9999999999999.css' %}"
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo"><img src="{% static 'image/logo.jpg' %}" alt="Logo"></div>
+            <h1>PCR Portal - Report a Crime</h1>
+            <a href="{% url 'indexpublic' %}" class="home-btn"><i class="fas fa-home"></i></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Report a Crime</h2>
+        <div class="form-box">
+            <form method="post" action="{% url 'submit_crime_report' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="full_name" class="required-field">Full Name</label>
+                    <input type="text" id="full_name" name="full_name" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="phone_number" class="required-field">Phone Number</label>
+                    <input type="tel" id="phone_number" name="phone_number" required 
+                        pattern="[6-9][0-9]{9}" 
+                        title="Enter a valid 10-digit Indian mobile number (starting with 6-9)" 
+                        placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="incident_date" class="required-field">Date of Incident</label>
+                    <input type="date" id="incident_date" name="incident_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="incident_time" class="required-field">Approximate Time</label>
+                    <input type="time" id="incident_time" name="incident_time" required>
+                </div>
+                <div class="form-group">
+                    <label for="crime_type" class="required-field">Type of Crime</label>
+                    <select id="crime_type" name="crime_type" required>
+                        <option value="" disabled selected>Select a crime type</option>
+                        <option>Theft</option>
+                        <option>Assault</option>
+                        <option>Fraud</option>
+                        <option>Vandalism</option>
+                        <option>Homicide</option>
+                        <option>Drug-Related Crime</option>
+                        <option>Sexual Offense</option>
+                        <option>Cybercrime</option>
+                        <option>Kidnapping</option>
+                        <option>Arson</option>
+                        <option>Other (please specify in description)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="crime_address" class="required-field">Address of Crime</label>
+                    <input type="text" id="crime_address" name="crime_address" required placeholder="Enter crime location">
+                </div>
+                <div class="form-group">
+                    <label for="description" class="required-field">Incident Description</label>
+                    <textarea id="description" name="description" rows="5" required></textarea>
+                </div>
+                <button type="submit">Submit Report</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

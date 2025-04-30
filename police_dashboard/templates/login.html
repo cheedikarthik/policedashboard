@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Crime Mapping Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/stylescop.css' %}">
+    <link rel="stylesheet" href="{% static 'css/logincop.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="watermark"></div>
+
+<div class="main">
+    <div class="logo">
+        <img src="{% static 'image/logo.jpg' %}" alt="Logo" width="400" height="400" />
+    </div>
+
+    <div class="login-container">
+        <h2>Officer Login - Crime Mapping Dashboard</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Officer ID</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-police">Login</button>
+        </form>
+
+        <h4 style="margin: 8px 0;">OR</h4>
+        <div class="button-row">
+            <button class="btn btn-public" onclick="window.location.href='{% url 'loginadmin' %}'">Continue as Admin</button>
+            <button class="btn btn-public" onclick="window.location.href='{% url 'indexpublic' %}'">Continue as Public</button>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/scriptcop.js' %}"></script>
+</body>
+</html>
