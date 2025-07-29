@@ -1,4 +1,4 @@
-# 🚓 Police Dashboard Web App
+# Police Dashboard Web App
 
 A web-based application that allows the public to **file FIRs**, **track case status**, access **emergency helpline numbers**, and **view active police unit locations** in real time. Designed to improve transparency and accessibility between citizens and law enforcement.
 
@@ -35,8 +35,8 @@ police_dashboard/
 
 - **Backend:** Python, Django
 - **Database:** PostgreSQL or SQLite (default)
-- **Frontend:** (To be added if applicable: React, HTML/CSS, Bootstrap, etc.)
-- **Map Integration:** (Optional: Google Maps API / Leaflet.js for location tracking)
+- **Frontend:** (To be added if applicable: js, HTML/CSS, etc.)
+- **Map Integration:** (Optional: Google Maps API for location tracking)
 
  Models Overview (sample)
  
